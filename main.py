@@ -1,5 +1,7 @@
 import pygame
 import random
+from inc.player import Player
+from inc.monster import Monster
 
 
 # define the screen dimensions
@@ -18,87 +20,7 @@ pygame.display.set_icon(icon)
 # background
 background = pygame.image.load('images/background.jpg')
 
-# define the player
-class Player:
-    def __init__(self, player_x, player_y, image):
-        self.x = player_x
-        self.y = player_y
-        self.image = image
-        self.mov_val = 5
-
-        # dummy rectangle for player
-        # self.rect = (player_x, player_y, 100, 100)
-
-    def draw_on_screen(self, window):
-        # pygame.draw.rect(window, (255, 0, 0), self.rect)
-        window.blit(self.image, (self.x, self.y))
-
-    def movement(self):
-        keys = pygame.key.get_pressed()
-
-        # keys for movement
-
-        # you're probably wondering why I did
-        # this part with just if's and no elifs
-        # Reason: this enables diagonal movement
-
-        if keys[pygame.K_LEFT]:
-            self.x -= self.mov_val
-        if keys[pygame.K_RIGHT]:
-            self.x += self.mov_val
-        if keys[pygame.K_UP]:
-            self.y -= self.mov_val
-        if keys[pygame.K_DOWN]:
-            self.y += self.mov_val
-
-        # movement restrictions
-        if self.x <= 40:
-            self.x = 40
-        elif self.x >= 1020:
-            self.x = 1020
-
-        if self.y <= 40:
-            self.y = 40
-        elif self.y >= 660:
-            self.y = 660
-
-       # self.update()
-
-    def activate_laser(self):
-        pass
-
-    # def update(self):
-    #       self.rect = (self.x, self.y, 100, 100)
-
 num_monsters = 5
-
-# monster class
-class Monster:
-    """Monster class"""
-    def __init__(self, monster_x, monster_y, monster_image):
-        self.shift_ver = 3
-        self.shift_hor = -50
-        self.x = monster_x
-        self.y = monster_y
-        self.image = monster_image
-
-    def draw_screen(self, window):
-        window.blit(self.image, (self.x, self.y))
-
-    def monster_movement(self):
-        # move to the left when
-        # monster reaches a boundary
-        self.y += self.shift_ver
-
-        if self.y <= 60:
-            self.shift_ver = random.randint(3,5)
-            self.x += self.shift_hor
-        elif self.y >= 640:
-            self.shift_ver = random.randint(-5, -3)
-            self.x += self.shift_hor
-
-    def got_hit():
-        pass
 
 
 def refresh_screen():
