@@ -10,10 +10,6 @@ class Player:
         self.image = image
         self.mov_val = 10
         self.blaster_img = pygame.image.load('images/blast.png')
-        self.blast_x = player_x
-        self.blast_y = player_y
-        self.blast_x_shift = 5
-        self.last_y_shift = 0
 
     def draw_on_screen(self, window):
         window.blit(self.image, (self.x, self.y))
@@ -42,16 +38,15 @@ class Player:
         elif self.y >= 660:
             self.y = 660
 
-    def fire_blast(self):
-        screen.blit(self.blaster_img, (self.blast_x + 64, self.blast_y + 5))
-
-    def activate_laser(self):
+    def activate_laser(self, window):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_SPACE]:
             blaster_sound = mixer.Sound('sounds/laser.wav')
             blaster_sound.play()
+            self.blast_x = self.x
+            self.blast_y = self.y
             try:
-                fire_blast()
+                window.blit(self.blaster_img, (self.blast_x + 104, self.blast_y + 22))
             except NameError as e:
                 print(e)

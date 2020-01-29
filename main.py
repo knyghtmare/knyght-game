@@ -25,6 +25,9 @@ mixer.music.play(-1)
 
 num_monsters = 5
 
+blast_x_shift = 5
+blaster_img = pygame.image.load('images/blast.png')
+
 
 def refresh_screen():
     screen.fill((0, 0, 0))
@@ -51,6 +54,7 @@ mon_y3 = random.randint(60, 640)
 mon_y4 = random.randint(60, 640)
 mon_y5 = random.randint(60, 640)
 
+
 def main():
     is_running = True
     clock = pygame.time.Clock()
@@ -73,7 +77,7 @@ def main():
                 pygame.quit()
 
         player1.movement()
-        player1.activate_laser()
+        player1.activate_laser(screen)
 
         monster1.monster_movement()
         monster1.draw_screen(screen)
