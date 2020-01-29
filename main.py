@@ -2,6 +2,7 @@ import pygame
 import random
 from inc.player import Player
 from inc.monster import Monster
+from pygame import mixer
 
 
 # define the screen dimensions
@@ -19,6 +20,8 @@ pygame.display.set_icon(icon)
 
 # background
 background = pygame.image.load('images/background.jpg')
+mixer.music.load('sounds/background.wav')
+mixer.music.play(-1)
 
 num_monsters = 5
 
@@ -70,6 +73,7 @@ def main():
                 pygame.quit()
 
         player1.movement()
+        player1.activate_laser()
 
         monster1.monster_movement()
         monster1.draw_screen(screen)
